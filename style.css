@@ -1,0 +1,209 @@
+/* FONT & RESET */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* HEADER */
+header {
+    background: #0a3d62;
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/* HERO */
+.hero {
+    background: url('https://images.unsplash.com/photo-1581090464777-23d36c1f3c4d') center/cover no-repeat;
+    padding: 120px 40px;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    background: rgba(0,0,0,0.55);
+    padding: 40px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.cta {
+    display: inline-block;
+    background: #1e90ff;
+    padding: 12px 25px;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.cta:hover { background: #0c7adf; }
+
+/* SECTIONS */
+.section {
+    padding: 80px 40px;
+}
+
+.section.light {
+    background: #f4f6f8;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* SERVIZI */
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.testimonial {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-style: italic;
+}
+
+/* CONTATTI */
+.center { text-align: center; }
+
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.contact-form button {
+    background: #0a3d62;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.contact-form button:hover { background: #072a44; }
+
+.phone {
+    color: #1e90ff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* FOOTER */
+footer {
+    background: #0a3d62;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* MOBILE CALL BUTTON */
+.call-mobile {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: #1e90ff;
+    padding: 15px 20px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .call-mobile { display: block; }
+}
+
+/* MENU MOBILE */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background: #0a3d62;
+        padding: 20px;
+    }
+
+    #menu.open ul {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+/* ANIMAZIONE FADE-IN */
+.fade { 
+    opacity: 0; 
+    transform: translateY(25px);
+    transition: 0.7s ease;
+}
+
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
