@@ -8,7 +8,7 @@ body {
 
 /* HEADER */
 header {
-    background: #0a3d62;
+    background: #a14040;
     color: #fff;
     padding: 15px 40px;
     display: flex;
@@ -56,7 +56,7 @@ nav a:hover {
 
 .cta {
     display: inline-block;
-    background: #1e90ff;
+    background: #a14040;
     padding: 12px 25px;
     color: white;
     border-radius: 6px;
@@ -64,7 +64,7 @@ nav a:hover {
     font-weight: bold;
     margin-top: 20px;
 }
-.cta:hover { background: #0c7adf; }
+.cta:hover { background: #a14040; }
 
 /* SECTIONS */
 .section {

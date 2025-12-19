@@ -4,13 +4,396 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assistenza Caldaie – Home</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a1a;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            color: #fff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        header .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, rgba(214, 52, 71, 0.9), rgba(161, 64, 64, 0.85)), 
+                        url('foto4.jpg') center/cover no-repeat;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .hero-content {
+            background: rgba(0,0,0,0.4);
+            padding: 60px 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            padding: 18px 45px;
+            color: #d63447;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '📞';
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 100px 5%;
+        }
+
+        .section.light {
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 42px;
+            font-weight: 800;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #d63447, #a14040);
+            border-radius: 2px;
+        }
+
+        .center {
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto 0;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* SERVICES */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #d63447, #a14040);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 60px rgba(214, 52, 71, 0.2);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            padding: 25px 25px 10px;
+            font-size: 24px;
+            color: #1a1a1a;
+        }
+
+        .service-card p {
+            padding: 0 25px 25px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 15px;
+        }
+
+        /* MOBILE CALL BUTTON */
+        .call-mobile {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            padding: 18px 28px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
+            display: none;
+            z-index: 999;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .call-mobile::before {
+            content: '📞';
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .call-mobile { display: block; }
+        }
+
+        /* MENU MOBILE */
+        .hamburger {
+            display: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+                padding: 30px;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                gap: 20px;
+            }
+
+            #menu.open ul {
+                display: flex;
+                animation: slideIn 0.3s ease;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+        }
+
+        /* ANIMAZIONE FADE-IN */
+        .fade { 
+            opacity: 0; 
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Assistenza Caldaie</div>
+    <div class="logo">WeN Assistenza Caldaie</div>
     <nav id="menu">
         <ul>
             <li><a href="index.html" class="active">Home</a></li>
@@ -27,13 +410,13 @@
     <div class="hero-content">
         <h1>Assistenza Caldaie Rapida & Professionale</h1>
         <p>Riparazioni, manutenzioni e installazioni. Interventi urgenti e tecnici qualificati nella tua zona.</p>
-        <a class="cta" href="tel: 0422 821309">Chiama Ora</a>
+        <a class="cta" href="tel:+390422821309">Chiama Ora</a>
     </div>
 </section>
 
 <section class="section light fade">
     <h2>Perché Affidarti a Noi?</h2>
-    <p class="center max800">
+    <p class="center">
         Siamo specializzati nell'assistenza, manutenzione e riparazione di caldaie, scaldabagni e impianti termici.  
         Garantiamo interventi rapidi, tecnici qualificati, ricambi certificati e soluzioni durature per la tua sicurezza.
     </p>
@@ -44,19 +427,20 @@
 
     <div class="services-container">
         <div class="service-card">
-            <img src="https://images.unsplash.com/photo-1594041680534-e31232ffe2d9?q=80&w=600" alt="">
+            <img src="immagini/boiler.jpg" alt="Boiler">
+ 
             <h3>Interventi Rapidi</h3>
             <p>Assistenza urgente con arrivo entro poche ore dalla chiamata.</p>
         </div>
 
         <div class="service-card">
-            <img src="https://images.unsplash.com/photo-1581090462621-7c9fb3c2d6d3?q=80&w=600" alt="">
+            <img src="immagini/plumber.jpg" alt="Ricambi originali">
             <h3>Ricambi Originali</h3>
             <p>Utilizziamo soltanto componenti certificati e garantiti.</p>
         </div>
 
         <div class="service-card">
-            <img src="https://images.unsplash.com/photo-1581092795360-df37e9f43b82?q=80&w=600" alt="">
+            <img src="immagini/fix.jpg" alt="Professionalità">
             <h3>Professionalità</h3>
             <p>Tecnici formati e aggiornati per ogni tipo di impianto.</p>
         </div>
@@ -64,11 +448,32 @@
 </section>
 
 <footer>
-    <p>© 2025 Assistenza Caldaie – Tutti i diritti riservati</p>
+    <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
 </footer>
 
-<a class="call-mobile" href="tel:+390000000000">Chiama Ora</a>
+<a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('open');
+    }
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
-

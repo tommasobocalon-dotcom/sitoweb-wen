@@ -3,14 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contatti Assistenza Caldaie</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <title>Contatti – Assistenza Caldaie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a1a1a;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            color: #fff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        header .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 100px 5%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 42px;
+            font-weight: 800;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #d63447, #a14040);
+            border-radius: 2px;
+        }
+
+        .center {
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto 0;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* CONTACT INFO */
+        .contact-info {
+            text-align: center;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            max-width: 600px;
+        }
+
+        .phone {
+            display: inline-block;
+            color: #d63447;
+            text-decoration: none;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .phone::before {
+            content: '📞';
+            margin-right: 10px;
+        }
+
+        .phone:hover {
+            transform: scale(1.05);
+            color: #a14040;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .email-link {
+            color: #d63447;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .email-link:hover {
+            color: #a14040;
+        }
+
+        /* CONTACT FORM */
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus, 
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #d63447;
+            box-shadow: 0 0 0 4px rgba(214, 52, 71, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(214, 52, 71, 0.3);
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(214, 52, 71, 0.4);
+        }
+
+        .contact-form button:active {
+            transform: translateY(-1px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 15px;
+        }
+
+        /* MOBILE CALL BUTTON */
+        .call-mobile {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            padding: 18px 28px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
+            display: none;
+            z-index: 999;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .call-mobile::before {
+            content: '📞';
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .call-mobile { display: block; }
+        }
+
+        /* MENU MOBILE */
+        .hamburger {
+            display: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+                padding: 30px;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                gap: 20px;
+            }
+
+            #menu.open ul {
+                display: flex;
+                animation: slideIn 0.3s ease;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+
+            .phone {
+                font-size: 24px;
+            }
+        }
+
+        /* ANIMAZIONE FADE-IN */
+        .fade { 
+            opacity: 0; 
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Assistenza Caldaie</div>
+    <div class="logo">WeN Assistenza Caldaie</div>
     <nav id="menu">
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -26,31 +352,95 @@
 <section class="section fade">
     <h2>Contattaci</h2>
 
-    <p class="center max800">
+    <p class="center">
         Per assistenza immediata o per richiedere informazioni sui nostri servizi, contattaci senza impegno.
     </p>
 
-    <div class="center">
-        <a class="phone" href="tel: 0422 821309">📞 0422 821309</a>
-        <br><br>
-        <p>Email: wuenne@libero.it</p>
+    <div class="contact-info fade">
+        <a class="phone" href="tel:0422821309">0422 821309</a>
+        <p>Email: <a href="mailto:wuenne@libero.it" class="email-link">wuenne@libero.it</a></p>
     </div>
 
-    <form class="contact-form fade">
-        <input type="text" placeholder="Nome" required>
-        <input type="email" placeholder="Email" required>
-        <textarea rows="5" placeholder="Messaggio"></textarea>
+    <form class="contact-form fade" id="contactForm">
+        <input type="text" id="nome" placeholder="Nome e Cognome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="telefono" placeholder="Telefono" required>
+        <textarea id="messaggio" rows="5" placeholder="Messaggio" required></textarea>
         <button type="submit">Invia Richiesta</button>
+        <p id="formMessage" style="text-align: center; margin-top: 10px;"></p>
     </form>
 
 </section>
 
 <footer>
-    <p>© 2025 Assistenza Caldaie</p>
+    <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
 </footer>
 
-<a class="call-mobile" href="tel: 0422821309">Chiama Ora</a>
+<a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('open');
+    }
+
+    // Fade-in animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    // Form validation
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let nome = document.getElementById("nome").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let telefono = document.getElementById("telefono").value.trim();
+        let messaggio = document.getElementById("messaggio").value.trim();
+        let msg = document.getElementById("formMessage");
+
+        if (nome.length < 2) {
+            msg.textContent = "Inserisci un nome valido.";
+            msg.style.color = "red";
+            return;
+        }
+
+        if (!email.includes("@") || !email.includes(".")) {
+            msg.textContent = "Inserisci un'email valida.";
+            msg.style.color = "red";
+            return;
+        }
+
+        if (telefono.length < 7) {
+            msg.textContent = "Inserisci un numero di telefono valido.";
+            msg.style.color = "red";
+            return;
+        }
+
+        if (messaggio.length < 10) {
+            msg.textContent = "Il messaggio è troppo breve.";
+            msg.style.color = "red";
+            return;
+        }
+
+        msg.textContent = "✓ Messaggio inviato con successo!";
+        msg.style.color = "#28a745";
+        msg.style.fontWeight = "bold";
+
+        document.getElementById("contactForm").reset();
+    });
+</script>
 
 </body>
 </html>
-
