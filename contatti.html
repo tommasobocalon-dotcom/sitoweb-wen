@@ -193,6 +193,18 @@
             box-shadow: 0 0 0 4px rgba(214, 52, 71, 0.1);
         }
 
+        .contact-form input.error,
+        .contact-form textarea.error {
+            border-color: #dc3545;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
         .contact-form textarea {
             resize: vertical;
             min-height: 150px;
@@ -211,13 +223,42 @@
             box-shadow: 0 5px 20px rgba(214, 52, 71, 0.3);
         }
 
-        .contact-form button:hover {
+        .contact-form button:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 8px 30px rgba(214, 52, 71, 0.4);
         }
 
         .contact-form button:active {
             transform: translateY(-1px);
+        }
+
+        .contact-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #formMessage {
+            text-align: center;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        #formMessage.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #formMessage.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         /* FOOTER */
@@ -362,12 +403,12 @@
     </div>
 
     <form class="contact-form fade" id="contactForm">
-        <input type="text" id="nome" placeholder="Nome e Cognome" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="tel" id="telefono" placeholder="Telefono" required>
-        <textarea id="messaggio" rows="5" placeholder="Messaggio" required></textarea>
+        <input type="text" id="nome" placeholder="Nome e Cognome *" required>
+        <input type="email" id="email" placeholder="Email *" required>
+        <input type="tel" id="telefono" placeholder="Telefono *" required>
+        <textarea id="messaggio" rows="5" placeholder="Messaggio *" required></textarea>
         <button type="submit">Invia Richiesta</button>
-        <p id="formMessage" style="text-align: center; margin-top: 10px;"></p>
+        <div id="formMessage"></div>
     </form>
 
 </section>
@@ -379,10 +420,21 @@
 <a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
 
 <script>
+    // Toggle menu mobile
     function toggleMenu() {
         const menu = document.getElementById('menu');
         menu.classList.toggle('open');
     }
+
+    // Chiudi menu quando si clicca fuori
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('menu');
+        const hamburger = document.querySelector('.hamburger');
+        
+        if (menu && hamburger && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+            menu.classList.remove('open');
+        }
+    });
 
     // Fade-in animation on scroll
     const observerOptions = {
@@ -400,46 +452,96 @@
 
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
-    // Form validation
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    // Form validation e invio
+    const form = document.getElementById('contactForm');
+    const msgDiv = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        let nome = document.getElementById("nome").value.trim();
-        let email = document.getElementById("email").value.trim();
-        let telefono = document.getElementById("telefono").value.trim();
-        let messaggio = document.getElementById("messaggio").value.trim();
-        let msg = document.getElementById("formMessage");
-
-        if (nome.length < 2) {
-            msg.textContent = "Inserisci un nome valido.";
-            msg.style.color = "red";
+        
+        // Reset errori precedenti
+        document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        msgDiv.className = '';
+        msgDiv.style.display = 'none';
+        
+        // Raccogli dati
+        const nome = document.getElementById('nome');
+        const email = document.getElementById('email');
+        const telefono = document.getElementById('telefono');
+        const messaggio = document.getElementById('messaggio');
+        
+        let isValid = true;
+        
+        // Validazione nome
+        if (nome.value.trim().length < 2) {
+            nome.classList.add('error');
+            showMessage('Inserisci un nome valido (minimo 2 caratteri)', 'error');
+            isValid = false;
             return;
         }
-
-        if (!email.includes("@") || !email.includes(".")) {
-            msg.textContent = "Inserisci un'email valida.";
-            msg.style.color = "red";
+        
+        // Validazione email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+            email.classList.add('error');
+            showMessage('Inserisci un\'email valida', 'error');
+            isValid = false;
             return;
         }
-
-        if (telefono.length < 7) {
-            msg.textContent = "Inserisci un numero di telefono valido.";
-            msg.style.color = "red";
+        
+        // Validazione telefono
+        const telefonoClean = telefono.value.replace(/\s/g, '');
+        if (telefonoClean.length < 9) {
+            telefono.classList.add('error');
+            showMessage('Inserisci un numero di telefono valido', 'error');
+            isValid = false;
             return;
         }
-
-        if (messaggio.length < 10) {
-            msg.textContent = "Il messaggio è troppo breve.";
-            msg.style.color = "red";
+        
+        // Validazione messaggio
+        if (messaggio.value.trim().length < 10) {
+            messaggio.classList.add('error');
+            showMessage('Il messaggio deve contenere almeno 10 caratteri', 'error');
+            isValid = false;
             return;
         }
-
-        msg.textContent = "✓ Messaggio inviato con successo!";
-        msg.style.color = "#28a745";
-        msg.style.fontWeight = "bold";
-
-        document.getElementById("contactForm").reset();
+        
+        if (isValid) {
+            // Disabilita pulsante durante invio
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Invio in corso...';
+            
+            // Simula invio (qui andresti a collegare un backend reale)
+            setTimeout(() => {
+                showMessage('✓ Messaggio inviato con successo! Ti contatteremo presto.', 'success');
+                form.reset();
+                btn.disabled = false;
+                btn.textContent = 'Invia Richiesta';
+                
+                // Log dati (in produzione, invieresti questi dati al server)
+                console.log('Dati form:', {
+                    nome: nome.value,
+                    email: email.value,
+                    telefono: telefono.value,
+                    messaggio: messaggio.value
+                });
+            }, 1000);
+        }
     });
+
+    function showMessage(text, type) {
+        msgDiv.textContent = text;
+        msgDiv.className = type;
+        msgDiv.style.display = 'block';
+        
+        // Auto-hide dopo 5 secondi se è un messaggio di successo
+        if (type === 'success') {
+            setTimeout(() => {
+                msgDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
 </script>
 
 </body>

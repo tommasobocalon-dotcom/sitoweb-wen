@@ -16,6 +16,7 @@
             color: #1a1a1a;
             line-height: 1.7;
             overflow-x: hidden;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
         }
 
         /* HEADER */
@@ -31,6 +32,12 @@
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             backdrop-filter: blur(10px);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         header .logo {
@@ -98,18 +105,39 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 0;
             height: 4px;
             background: linear-gradient(90deg, #d63447, #a14040);
             border-radius: 2px;
+            transition: width 0.6s ease;
         }
 
-        /* SERVICES */
+        h2.visible::after {
+            width: 80px;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto 50px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SERVICES CON EFFETTI AVANZATI */
         .services-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            gap: 40px;
             margin-top: 60px;
+            perspective: 1500px;
         }
 
         .service-card {
@@ -118,11 +146,28 @@
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
         }
 
         .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card::after {
             content: '';
             position: absolute;
             top: 0;
@@ -134,30 +179,93 @@
             transition: transform 0.4s ease;
         }
 
-        .service-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 60px rgba(214, 52, 71, 0.2);
+        .service-card:hover::after {
+            transform: scaleX(1);
         }
 
-        .service-card:hover::before {
-            transform: scaleX(1);
+        .service-card:hover {
+            transform: translateY(-25px) rotateX(10deg) scale(1.02);
+            box-shadow: 0 30px 80px rgba(214, 52, 71, 0.3);
+        }
+
+        .service-card:nth-child(1) {
+            animation: slideInLeft 0.8s ease 0.1s both;
+        }
+
+        .service-card:nth-child(2) {
+            animation: slideInLeft 0.8s ease 0.3s both;
+        }
+
+        .service-card:nth-child(3) {
+            animation: slideInLeft 0.8s ease 0.5s both;
+        }
+
+        .service-card:nth-child(4) {
+            animation: slideInLeft 0.8s ease 0.7s both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px) rotateY(-30deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotateY(0);
+            }
+        }
+
+        .img-container {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
         }
 
         .service-card img {
             width: 100%;
-            height: 220px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease, filter 0.6s ease;
         }
 
         .service-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(3deg);
+            filter: brightness(1.15) contrast(1.1);
+        }
+
+        .service-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(214, 52, 71, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .service-card h3 {
             padding: 25px 25px 10px;
             font-size: 24px;
             color: #1a1a1a;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover h3 {
+            color: #d63447;
+            transform: translateX(5px);
         }
 
         .service-card p {
@@ -165,6 +273,68 @@
             color: #666;
             font-size: 16px;
             line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover p {
+            color: #444;
+        }
+
+        .service-features {
+            padding: 0 25px 25px;
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: #666;
+            font-size: 15px;
+            position: relative;
+            padding-left: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #d63447;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-features li::before {
+            transform: scale(1.3);
+        }
+
+        .service-features li:hover {
+            padding-left: 30px;
+            color: #d63447;
+        }
+
+        .cta-button {
+            display: block;
+            margin: 20px 25px 25px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .service-card:hover .cta-button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(214, 52, 71, 0.4);
         }
 
         /* FOOTER */
@@ -190,12 +360,12 @@
             box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
             display: none;
             z-index: 999;
-            animation: bounce 2s infinite;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 40px rgba(214, 52, 71, 0.7); }
         }
 
         .call-mobile::before {
@@ -240,14 +410,8 @@
             }
 
             @keyframes slideIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
             }
 
             .hamburger {
@@ -294,31 +458,75 @@
 
 <section class="section fade">
     <h2>I Nostri Servizi</h2>
+    <p class="intro">
+        Offriamo una gamma completa di servizi per garantire il perfetto funzionamento del tuo impianto termico.
+        Dalla manutenzione ordinaria agli interventi di emergenza, siamo sempre pronti ad aiutarti.
+    </p>
 
     <div class="services-container">
 
-        <div class="service-card fade">
-            <img src="https://images.unsplash.com/photo-1581091012184-5c72b3c71f52?q=80&w=600" alt="Manutenzione caldaie">
+        <div class="service-card">
+            <div class="img-container">
+                <img src="immagini/boiler.jpg" alt="Manutenzione caldaie">
+                <div class="service-icon">🔧</div>
+            </div>
             <h3>Manutenzione Caldaie</h3>
-            <p>Pulizia, controllo fumi, rendimento, sicurezza, verifica camera di combustione e registrazione libretto.</p>
+            <p>Controlli periodici completi per garantire efficienza e sicurezza del tuo impianto.</p>
+            <ul class="service-features">
+                <li>Pulizia e controllo fumi</li>
+                <li>Verifica rendimento energetico</li>
+                <li>Test sicurezza componenti</li>
+                <li>Aggiornamento libretto impianto</li>
+            </ul>
+            <a href="contatti.html" class="cta-button">Richiedi Preventivo</a>
         </div>
 
-        <div class="service-card fade">
-            <img src="https://images.unsplash.com/photo-1581093448799-1c66d30b3964?q=80&w=600" alt="Riparazioni urgenti">
+        <div class="service-card">
+            <div class="img-container">
+                <img src="immagini/instal.jpg" alt="Riparazioni urgenti">
+                <div class="service-icon">🚨</div>
+            </div>
             <h3>Riparazioni Urgenti</h3>
-            <p>Interventi rapidi per guasti, perdite, mancata accensione, errori di sistema o blocchi improvvisi.</p>
+            <p>Interventi rapidi 24/7 per risolvere guasti e problemi improvvisi.</p>
+            <ul class="service-features">
+                <li>Disponibilità h24 tutto l'anno</li>
+                <li>Arrivo entro 2 ore in emergenza</li>
+                <li>Diagnosi rapida del problema</li>
+                <li>Ricambi originali sempre disponibili</li>
+            </ul>
+            <a href="tel:0422821309" class="cta-button">Chiama per Emergenze</a>
         </div>
 
-        <div class="service-card fade">
-            <img src="https://images.unsplash.com/photo-1595769816263-6989e0a8a9e0?q=80&w=600" alt="Installazioni">
+        <div class="service-card">
+            <div class="img-container">
+                <img src="immagini/heating.jpg" alt="Installazioni">
+                <div class="service-icon">⚙️</div>
+            </div>
             <h3>Installazioni</h3>
-            <p>Installazione e sostituzione di caldaie ad alta efficienza, configurazione e prima accensione.</p>
+            <p>Installazione professionale di caldaie nuove e sostituzione delle vecchie.</p>
+            <ul class="service-features">
+                <li>Consulenza gratuita sul modello</li>
+                <li>Installazione certificata</li>
+                <li>Configurazione e collaudo</li>
+                <li>Garanzia completa sui lavori</li>
+            </ul>
+            <a href="contatti.html" class="cta-button">Richiedi Sopralluogo</a>
         </div>
 
-        <div class="service-card fade">
-            <img src="https://images.unsplash.com/photo-1581093806997-753f5e768490?q=80&w=600" alt="Contratti manutenzione">
+        <div class="service-card">
+            <div class="img-container">
+                <img src="immagini/caldaia-4.jpg" alt="Contratti manutenzione">
+                <div class="service-icon">📋</div>
+            </div>
             <h3>Contratti di Manutenzione</h3>
-            <p>Contratti annuali o biennali con manutenzione programmata e assistenza prioritaria.</p>
+            <p>Piani personalizzati per la manutenzione programmata del tuo impianto.</p>
+            <ul class="service-features">
+                <li>Controlli programmati annuali</li>
+                <li>Priorità negli interventi urgenti</li>
+                <li>Sconti su ricambi e manodopera</li>
+                <li>Tranquillità per tutto l'anno</li>
+            </ul>
+            <a href="contatti.html" class="cta-button">Scopri i Piani</a>
         </div>
 
     </div>
@@ -351,6 +559,7 @@
     }, observerOptions);
 
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+    document.querySelectorAll('h2').forEach(el => observer.observe(el));
 </script>
 
 </body>
