@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIRCE - Catasto Impianti Termici — WeN Assistenza Caldaie</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #1a1a1a;
+        line-height: 1.7;
+        overflow-x: hidden;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      }
+
+      /* HEADER */
+      header {
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        color: #fff;
+        padding: 20px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        animation: slideDown 0.5s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      header .logo {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: white;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      nav a:hover {
+        transform: translateY(-2px);
+      }
+
+      /* SECTIONS */
+      .section {
+        padding: 100px 5%;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 42px;
+        font-weight: 800;
+        color: #1a1a1a;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #d63447, #a14040);
+        border-radius: 2px;
+      }
+
+      .intro {
+        text-align: center;
+        max-width: 900px;
+        margin: 30px auto 50px;
+        font-size: 18px;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      .circe-acronym {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: center;
+        border-left: 5px solid #d63447;
+      }
+
+      .circe-acronym h3 {
+        color: #d63447;
+        font-size: 28px;
+        margin-bottom: 15px;
+      }
+
+      .circe-acronym p {
+        font-size: 18px;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      /* INFO CARDS */
+      .info-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        margin-top: 60px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .info-card {
+        background: white;
+        padding: 35px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        position: relative;
+        border-top: 5px solid transparent;
+      }
+
+      .info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(214, 52, 71, 0.2);
+        border-top-color: #d63447;
+      }
+
+      .info-card-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 20px;
+        box-shadow: 0 5px 20px rgba(214, 52, 71, 0.3);
+      }
+
+      .info-card h3 {
+        font-size: 22px;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .info-card p,
+      .info-card ul {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .info-card ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+      }
+
+      .info-card ul li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .info-card ul li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #d63447;
+        font-weight: bold;
+      }
+
+      /* TIMELINE */
+      .timeline {
+        max-width: 900px;
+        margin: 60px auto;
+        position: relative;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #d63447, #a14040);
+        border-radius: 2px;
+      }
+
+      .timeline-item {
+        display: flex;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .timeline-item:nth-child(odd) {
+        justify-content: flex-start;
+      }
+
+      .timeline-item:nth-child(even) {
+        justify-content: flex-end;
+      }
+
+      .timeline-content {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        width: 45%;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(214, 52, 71, 0.2);
+      }
+
+      .timeline-date {
+        display: inline-block;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .timeline-content h4 {
+        color: #1a1a1a;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      .timeline-content p {
+        color: #666;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      /* CTA SECTION */
+      .cta-section {
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        padding: 80px 5%;
+        text-align: center;
+        color: white;
+        margin-top: 80px;
+      }
+
+      .cta-section h2 {
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      .cta-section h2::after {
+        background: white;
+      }
+
+      .cta-section p {
+        font-size: 20px;
+        margin-bottom: 30px;
+        opacity: 0.95;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: white;
+        color: #d63447;
+        padding: 18px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      .cta-button.secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .cta-button.secondary:hover {
+        background: white;
+        color: #d63447;
+      }
+
+      /* DOWNLOAD BOX */
+      .download-box {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        max-width: 700px;
+        margin: 50px auto;
+        text-align: center;
+        border: 2px dashed #d63447;
+      }
+
+      .download-box h3 {
+        color: #d63447;
+        font-size: 26px;
+        margin-bottom: 15px;
+      }
+
+      .download-box p {
+        color: #666;
+        font-size: 17px;
+        margin-bottom: 25px;
+      }
+
+      .download-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        color: white;
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(214, 52, 71, 0.3);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(214, 52, 71, 0.4);
+      }
+
+      .download-btn::before {
+        content: "📄";
+        margin-right: 10px;
+      }
+
+      /* FOOTER */
+      footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 15px;
+      }
+
+      /* MOBILE CALL BUTTON */
+      .call-mobile {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        padding: 18px 28px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
+        display: none;
+        z-index: 999;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .call-mobile::before {
+        content: "📞";
+        margin-right: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .call-mobile {
+          display: block;
+        }
+      }
+
+      /* MENU MOBILE */
+      .hamburger {
+        display: none;
+        font-size: 32px;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.3s ease;
+      }
+
+      .hamburger:hover {
+        transform: rotate(90deg);
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+          padding: 30px;
+          position: absolute;
+          top: 70px;
+          right: 20px;
+          border-radius: 15px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          gap: 20px;
+        }
+
+        #menu.open ul {
+          display: flex;
+          animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        h2 {
+          font-size: 32px;
+        }
+
+        .section {
+          padding: 60px 5%;
+        }
+
+        .timeline::before {
+          left: 20px;
+        }
+
+        .timeline-item {
+          justify-content: flex-end !important;
+        }
+
+        .timeline-content {
+          width: calc(100% - 60px);
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cta-button {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      /* ANIMAZIONE FADE-IN */
+      .fade {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">WeN Assistenza Caldaie</div>
+      <nav id="menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="circe.html" class="active">CIRCE</a></li>
+          <li><a href="recensioni.html">Recensioni</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <section class="section fade">
+      <h2>CIRCE - Catasto Impianti Termici</h2>
+
+      <div class="circe-acronym">
+        <h3>Cosa significa CIRCE?</h3>
+        <p>
+          <strong>C</strong>atasto <strong>I</strong>mpianti e
+          <strong>R</strong>apporti di <strong>C</strong>ontrollo di
+          <strong>E</strong>fficienza Energetica
+        </p>
+      </div>
+
+      <p class="intro">
+        Il sistema telematico della Regione Veneto per la registrazione e
+        gestione dei Libretti degli impianti termici e dei Rapporti di controllo
+        di efficienza energetica. Un servizio fondamentale per la conformità
+        normativa e il monitoraggio delle prestazioni energetiche degli impianti
+        di climatizzazione.
+      </p>
+    </section>
+
+    <section class="section fade" style="padding-top: 0">
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-icon">📋</div>
+          <h3>Cos'è CIRCE</h3>
+          <p>
+            Sistema telematico istituito dalla Regione Veneto con D.G.R.V. n.
+            2569 del 23 dicembre 2014 per la gestione del Catasto regionale
+            degli impianti termici.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">⚖️</div>
+          <h3>Normativa di Riferimento</h3>
+          <p>
+            Attuazione della D.G.R.V. n.1363 del 28 luglio 2014 che applica il
+            D.P.R. 74/2013 sugli impianti di climatizzazione in tutto il
+            territorio veneto.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">🔧</div>
+          <h3>Per gli Operatori</h3>
+          <p>
+            Accesso riservato a ditte installatrici, manutentrici e operatori
+            accreditati tramite credenziali personali per la gestione completa
+            degli impianti.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">💻</div>
+          <h3>Funzionalità Online</h3>
+          <ul>
+            <li>Compilazione Libretto di impianto</li>
+            <li>Registrazione codice catasto</li>
+            <li>Rapporti di efficienza energetica</li>
+            <li>Consultazione e aggiornamenti</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">🎯</div>
+          <h3>Obiettivi</h3>
+          <ul>
+            <li>Supporto agli operatori del settore</li>
+            <li>Semplificazione amministrativa</li>
+            <li>Monitoraggio prestazioni energetiche</li>
+            <li>Contenimento consumi energetici</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">📊</div>
+          <h3>Vantaggi</h3>
+          <ul>
+            <li>Gestione digitale completa</li>
+            <li>Tracciabilità degli interventi</li>
+            <li>Conformità normativa garantita</li>
+            <li>Accesso rapido ai dati</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section fade"
+      style="background: white; padding-top: 80px; padding-bottom: 80px"
+    >
+      <h2>Storia e Sviluppo</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">28 Luglio 2014</span>
+            <h4>D.G.R.V. n.1363</h4>
+            <p>
+              Approvazione delle disposizioni attuative del D.P.R.74/2013 per
+              uniformare l'applicazione della disciplina sugli impianti di
+              climatizzazione in Veneto.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">15 Ottobre 2014</span>
+            <h4>Libretto v1.1 in Vigore</h4>
+            <p>
+              Entrata in vigore della versione 1.1 del Libretto di impianto e
+              attivazione del sistema telematico per la registrazione.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">23 Dicembre 2014</span>
+            <h4>Istituzione CIRCE</h4>
+            <p>
+              Con D.G.R.V. n. 2569 viene istituito il Catasto regionale degli
+              impianti termici CIRCE-ImpiantiTermici nel portale regionale.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">Oggi</span>
+            <h4>Sistema Operativo</h4>
+            <p>
+              CIRCE è pienamente operativo e rappresenta lo strumento principale
+              per la gestione degli impianti termici in Regione Veneto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade">
+      <div class="download-box">
+        <h3>Scarica il Libretto di Impianto</h3>
+        <p>
+          Scarica il modello PDF del Libretto di impianto termico per
+          consultazione o stampa personale.
+        </p>
+        <a
+          href="https://www.regione.veneto.it/web/energia/circe"
+          target="_blank"
+          class="download-btn"
+          >Scarica PDF</a
+        >
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Hai Bisogno di Assistenza?</h2>
+      <p>
+        Il nostro team è specializzato nella gestione completa del Libretto di
+        impianto<br />e nell'utilizzo del sistema CIRCE per la tua conformità
+        normativa.
+      </p>
+
+      <div class="cta-buttons">
+        <a href="tel:0422821309" class="cta-button">📞 Chiama Ora</a>
+        <a href="contatti.html" class="cta-button secondary"
+          >✉️ Richiedi Info</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 WeN Assistenza Caldaie — Tutti i diritti riservati</p>
+    </footer>
+
+    <a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("open");
+      }
+
+      // Chiudi menu quando si clicca fuori
+      document.addEventListener("click", function (e) {
+        const menu = document.getElementById("menu");
+        const hamburger = document.querySelector(".hamburger");
+
+        if (
+          menu &&
+          hamburger &&
+          !menu.contains(e.target) &&
+          !hamburger.contains(e.target)
+        ) {
+          menu.classList.remove("open");
+        }
+      });
+
+      // Fade-in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

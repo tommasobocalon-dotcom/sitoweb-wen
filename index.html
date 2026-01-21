@@ -1,718 +1,782 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assistenza Caldaie – Home</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #1a1a1a;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #1a1a1a;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-        /* HEADER CON ANIMAZIONE */
-        header {
-            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-            color: #fff;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-            animation: slideDown 0.5s ease;
-        }
+      /* HEADER CON ANIMAZIONE */
+      header {
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        color: #fff;
+        padding: 20px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        animation: slideDown 0.5s ease;
+      }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
         }
-
-        header .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: glow 2s ease-in-out infinite;
+        to {
+          transform: translateY(0);
+          opacity: 1;
         }
+      }
 
-        @keyframes glow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-            50% { text-shadow: 2px 2px 15px rgba(255,255,255,0.6); }
+      header .logo {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
+        50% {
+          text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.6);
+        }
+      }
 
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: white;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      nav a:hover {
+        transform: translateY(-2px);
+      }
+
+      /* HERO CON PARTICLES */
+      .hero {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(214, 52, 71, 0.9),
+            rgba(161, 64, 64, 0.85)
+          ),
+          url("foto4.jpg") center/cover no-repeat;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.3;
+        }
+      }
+
+      .particle {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .hero-content {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 60px 50px;
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        max-width: 700px;
+        animation: zoomIn 1s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        animation: slideInLeft 1s ease 0.3s both;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .hero p {
+        font-size: 20px;
+        margin-bottom: 30px;
+        opacity: 0.95;
+        animation: slideInRight 1s ease 0.5s both;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+        padding: 18px 45px;
+        color: #d63447;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 18px;
+        margin-top: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        animation: bounceIn 1s ease 0.7s both;
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .cta::before {
+        content: "📞";
+        margin-right: 8px;
+        font-size: 20px;
+        animation: ring 1s ease infinite;
+      }
+
+      @keyframes ring {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        10%,
+        30% {
+          transform: rotate(-15deg);
+        }
+        20%,
+        40% {
+          transform: rotate(15deg);
+        }
+      }
+
+      .cta::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.6s,
+          height 0.6s;
+      }
+
+      .cta:hover::after {
+        width: 300px;
+        height: 300px;
+      }
+
+      .cta:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      }
+
+      /* SECTIONS */
+      .section {
+        padding: 100px 5%;
+      }
+
+      .section.light {
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 42px;
+        font-weight: 800;
+        color: #1a1a1a;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #d63447, #a14040);
+        border-radius: 2px;
+        transition: width 0.6s ease;
+      }
+
+      h2.visible::after {
+        width: 80px;
+      }
+
+      .center {
+        text-align: center;
+        max-width: 800px;
+        margin: 30px auto 0;
+        font-size: 18px;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      /* SERVICES CON ANIMAZIONI 3D */
+      .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 35px;
+        margin-top: 60px;
+        perspective: 1000px;
+      }
+
+      .service-card {
+        background: white;
+        padding: 0;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: all 0.4s ease;
+        position: relative;
+        transform-style: preserve-3d;
+        cursor: pointer;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #d63447, #a14040);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-20px) rotateX(5deg);
+        box-shadow: 0 25px 70px rgba(214, 52, 71, 0.3);
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition:
+          transform 0.5s ease,
+          filter 0.5s ease;
+      }
+
+      .service-card:hover img {
+        transform: scale(1.15) rotate(2deg);
+        filter: brightness(1.1);
+      }
+
+      .service-card h3 {
+        padding: 25px 25px 10px;
+        font-size: 24px;
+        color: #1a1a1a;
+        transition: color 0.3s ease;
+      }
+
+      .service-card:hover h3 {
+        color: #d63447;
+      }
+
+      .service-card p {
+        padding: 0 25px 25px;
+        color: #666;
+        font-size: 16px;
+      }
+
+      /* COUNTER STATS */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .stat-box {
+        text-align: center;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .stat-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(214, 52, 71, 0.2);
+      }
+
+      .stat-number {
+        font-size: 48px;
+        font-weight: 800;
+        color: #d63447;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 16px;
+        color: #666;
+        font-weight: 600;
+      }
+
+      /* FOOTER */
+      footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 15px;
+      }
+
+      /* MOBILE CALL BUTTON */
+      .call-mobile {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        padding: 18px 28px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
+        display: none;
+        z-index: 999;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .call-mobile::before {
+        content: "📞";
+        margin-right: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .call-mobile {
+          display: block;
+        }
+      }
+
+      /* MENU MOBILE */
+      .hamburger {
+        display: none;
+        font-size: 32px;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.3s ease;
+      }
+
+      .hamburger:hover {
+        transform: rotate(90deg);
+      }
+
+      @media (max-width: 768px) {
         nav ul {
-            list-style: none;
-            display: flex;
-            gap: 35px;
+          display: none;
+          flex-direction: column;
+          background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+          padding: 30px;
+          position: absolute;
+          top: 70px;
+          right: 20px;
+          border-radius: 15px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          gap: 20px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            position: relative;
+        #menu.open ul {
+          display: flex;
+          animation: slideIn 0.3s ease;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: white;
-            transition: width 0.3s ease;
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            transform: translateY(-2px);
-        }
-
-        /* HERO CON PARTICLES */
-        .hero {
-            background: linear-gradient(135deg, rgba(214, 52, 71, 0.9), rgba(161, 64, 64, 0.85)), 
-                        url('foto4.jpg') center/cover no-repeat;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.3; }
-        }
-
-        .particle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-100vh) translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .hero-content {
-            background: rgba(0,0,0,0.4);
-            padding: 60px 50px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255,255,255,0.2);
-            max-width: 700px;
-            animation: zoomIn 1s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .hamburger {
+          display: block;
         }
 
         .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            animation: slideInLeft 1s ease 0.3s both;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+          font-size: 36px;
         }
 
         .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.95;
-            animation: slideInRight 1s ease 0.5s both;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .cta {
-            display: inline-block;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            padding: 18px 45px;
-            color: #d63447;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            margin-top: 10px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: bounceIn 1s ease 0.7s both;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); }
-        }
-
-        .cta::before {
-            content: '📞';
-            margin-right: 8px;
-            font-size: 20px;
-            animation: ring 1s ease infinite;
-        }
-
-        @keyframes ring {
-            0%, 100% { transform: rotate(0deg); }
-            10%, 30% { transform: rotate(-15deg); }
-            20%, 40% { transform: rotate(15deg); }
-        }
-
-        .cta::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .cta:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .cta:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-        }
-
-        /* SECTIONS */
-        .section {
-            padding: 100px 5%;
-        }
-
-        .section.light {
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+          font-size: 18px;
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 42px;
-            font-weight: 800;
-            color: #1a1a1a;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+          font-size: 32px;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #d63447, #a14040);
-            border-radius: 2px;
-            transition: width 0.6s ease;
+        .section {
+          padding: 60px 5%;
         }
+      }
 
-        h2.visible::after {
-            width: 80px;
+      /* ANIMAZIONE FADE-IN */
+      .fade {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* SCROLL INDICATOR */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scrollBounce 2s infinite;
+        z-index: 10;
+      }
+
+      @keyframes scrollBounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
         }
-
-        .center {
-            text-align: center;
-            max-width: 800px;
-            margin: 30px auto 0;
-            font-size: 18px;
-            color: #555;
-            line-height: 1.8;
+        50% {
+          transform: translateX(-50%) translateY(10px);
         }
+      }
 
-        /* SERVICES CON ANIMAZIONI 3D */
-        .services-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 60px;
-            perspective: 1000px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #d63447, #a14040);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-20px) rotateX(5deg);
-            box-shadow: 0 25px 70px rgba(214, 52, 71, 0.3);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s ease, filter 0.5s ease;
-        }
-
-        .service-card:hover img {
-            transform: scale(1.15) rotate(2deg);
-            filter: brightness(1.1);
-        }
-
-        .service-card h3 {
-            padding: 25px 25px 10px;
-            font-size: 24px;
-            color: #1a1a1a;
-            transition: color 0.3s ease;
-        }
-
-        .service-card:hover h3 {
-            color: #d63447;
-        }
-
-        .service-card p {
-            padding: 0 25px 25px;
-            color: #666;
-            font-size: 16px;
-        }
-
-        /* COUNTER STATS */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 40px 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(214, 52, 71, 0.2);
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: 800;
-            color: #d63447;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        /* FOOTER */
-        footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 15px;
-        }
-
-        /* MOBILE CALL BUTTON */
-        .call-mobile {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-            padding: 18px 28px;
-            border-radius: 50px;
-            color: white;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
-            display: none;
-            z-index: 999;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .call-mobile::before {
-            content: '📞';
-            margin-right: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .call-mobile { display: block; }
-        }
-
-        /* MENU MOBILE */
-        .hamburger {
-            display: none;
-            font-size: 32px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .hamburger:hover {
-            transform: rotate(90deg);
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                flex-direction: column;
-                background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-                padding: 30px;
-                position: absolute;
-                top: 70px;
-                right: 20px;
-                border-radius: 15px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                gap: 20px;
-            }
-
-            #menu.open ul {
-                display: flex;
-                animation: slideIn 0.3s ease;
-            }
-
-            @keyframes slideIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            h2 {
-                font-size: 32px;
-            }
-
-            .section {
-                padding: 60px 5%;
-            }
-        }
-
-        /* ANIMAZIONE FADE-IN */
-        .fade { 
-            opacity: 0; 
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-
-        .fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* SCROLL INDICATOR */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scrollBounce 2s infinite;
-            z-index: 10;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        .scroll-indicator::before {
-            content: '⌄';
-            font-size: 40px;
-            color: white;
-        }
+      .scroll-indicator::before {
+        content: "⌄";
+        font-size: 40px;
+        color: white;
+      }
     </style>
-</head>
-<body>
-
-<header>
-    <div class="logo">WeN Assistenza Caldaie</div>
-    <nav id="menu">
+  </head>
+  <body>
+    <header>
+      <div class="logo">WeN Assistenza Caldaie</div>
+      <nav id="menu">
         <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="servizi.html">Servizi</a></li>
-            <li><a href="chi-siamo.html">Chi Siamo</a></li>
-            <li><a href="recensioni.html">Recensioni</a></li>
-            <li><a href="contatti.html">Contatti</a></li>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="recensioni.html">Recensioni</a></li>
+          <li><a href="circe.html">CIRCE</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
         </ul>
-    </nav>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-</header>
+      </nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </header>
 
-<section class="hero">
-    <div class="hero-content">
+    <section class="hero">
+      <div class="hero-content">
         <h1>Assistenza Caldaie Rapida & Professionale</h1>
-        <p>Riparazioni, manutenzioni e installazioni. Interventi urgenti e tecnici qualificati nella tua zona.</p>
+        <p>
+          Riparazioni, manutenzioni e installazioni. Interventi urgenti e
+          tecnici qualificati nella tua zona.
+        </p>
         <a class="cta" href="tel:+390422821309">Chiama Ora</a>
-    </div>
-    <div class="scroll-indicator"></div>
-</section>
+      </div>
+      <div class="scroll-indicator"></div>
+    </section>
 
-<section class="section light fade">
-    <h2>Perché Affidarti a Noi?</h2>
-    <p class="center">
-        Siamo specializzati nell'assistenza, manutenzione e riparazione di caldaie.  
-        Garantiamo interventi rapidi, tecnici qualificati, ricambi certificati e soluzioni durature per la tua sicurezza.
-    </p>
-    
-    <div class="stats">
-        <div class="stat-box">
-            <div class="stat-number counter" data-target="500">0</div>
-            <div class="stat-label">Clienti Soddisfatti</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number counter" data-target="15">0</div>
-            <div class="stat-label">Anni di Esperienza</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number counter" data-target="1200">0</div>
-            <div class="stat-label">Interventi Annui</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number counter" data-target="24">0</div>
-            <div class="stat-label">Ore su 24 Disponibili</div>
-        </div>
-    </div>
-</section>
+    <section class="section light fade">
+      <h2>Perché Affidarti a Noi?</h2>
+      <p class="center">
+        Siamo specializzati nell'assistenza, manutenzione e riparazione di
+        caldaie. Garantiamo interventi rapidi, tecnici qualificati, ricambi
+        certificati e soluzioni durature per la tua sicurezza.
+      </p>
 
-<section class="section fade">
-    <h2>I Nostri Punti Di Forza</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-number counter" data-target="500">0</div>
+          <div class="stat-label">Clienti Soddisfatti</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number counter" data-target="15">0</div>
+          <div class="stat-label">Anni di Esperienza</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number counter" data-target="1200">0</div>
+          <div class="stat-label">Interventi Annui</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number counter" data-target="24">0</div>
+          <div class="stat-label">Ore su 24 Disponibili</div>
+        </div>
+      </div>
+    </section>
 
-    <div class="services-container">
+    <section class="section fade">
+      <h2>I Nostri Punti Di Forza</h2>
+
+      <div class="services-container">
         <div class="service-card">
-            <img src="immagini/boiler.jpg" alt="Boiler">
-            <h3>Interventi Rapidi</h3>
-            <p>Assistenza urgente con arrivo entro poche ore dalla chiamata.</p>
-        </div>
-
-        <div class="service-card">
-            <img src="immagini/plumber.jpg" alt="Ricambi originali">
-            <h3>Ricambi Originali</h3>
-            <p>Utilizziamo soltanto componenti certificati e garantiti.</p>
+          <img src="immagini/boiler.jpg" alt="Boiler" />
+          <h3>Interventi Rapidi</h3>
+          <p>Assistenza urgente con arrivo entro poche ore dalla chiamata.</p>
         </div>
 
         <div class="service-card">
-            <img src="immagini/fix.jpg" alt="Professionalità">
-            <h3>Professionalità</h3>
-            <p>Tecnici formati e aggiornati per ogni tipo di impianto.</p>
+          <img src="immagini/plumber.jpg" alt="Ricambi originali" />
+          <h3>Ricambi Originali</h3>
+          <p>Utilizziamo soltanto componenti certificati e garantiti.</p>
         </div>
-    </div>
-</section>
 
-<footer>
-    <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
-</footer>
+        <div class="service-card">
+          <img src="immagini/fix.jpg" alt="Professionalità" />
+          <h3>Professionalità</h3>
+          <p>Tecnici formati e aggiornati per ogni tipo di impianto.</p>
+        </div>
+      </div>
+    </section>
 
-<a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
+    <footer>
+      <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
+    </footer>
 
-<script>
-    // Toggle menu
-    function toggleMenu() {
-        const menu = document.getElementById('menu');
-        menu.classList.toggle('open');
-    }
+    <a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
 
-    // Particles effect
-    function createParticles() {
-        const hero = document.querySelector('.hero');
+    <script>
+      // Toggle menu
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("open");
+      }
+
+      // Particles effect
+      function createParticles() {
+        const hero = document.querySelector(".hero");
         for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 5 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            hero.appendChild(particle);
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.width = Math.random() * 5 + 2 + "px";
+          particle.style.height = particle.style.width;
+          particle.style.left = Math.random() * 100 + "%";
+          particle.style.animationDelay = Math.random() * 15 + "s";
+          particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+          hero.appendChild(particle);
         }
-    }
-    createParticles();
+      }
+      createParticles();
 
-    // Fade-in animation on scroll
-    const observerOptions = {
+      // Fade-in animation on scroll
+      const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
+        rootMargin: "0px 0px -100px 0px",
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
         });
-    }, observerOptions);
+      }, observerOptions);
 
-    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-    document.querySelectorAll('h2').forEach(el => observer.observe(el));
+      document.querySelectorAll(".fade").forEach((el) => observer.observe(el));
+      document.querySelectorAll("h2").forEach((el) => observer.observe(el));
 
-    // Counter animation
-    function animateCounter(el) {
-        const target = parseInt(el.getAttribute('data-target'));
+      // Counter animation
+      function animateCounter(el) {
+        const target = parseInt(el.getAttribute("data-target"));
         const duration = 2000;
         const step = target / (duration / 16);
         let current = 0;
 
         const counter = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                el.textContent = target + '+';
-                clearInterval(counter);
-            } else {
-                el.textContent = Math.floor(current);
-            }
+          current += step;
+          if (current >= target) {
+            el.textContent = target + "+";
+            clearInterval(counter);
+          } else {
+            el.textContent = Math.floor(current);
+          }
         }, 16);
-    }
+      }
 
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                animateCounter(entry.target);
-                entry.target.classList.add('counted');
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("counted")
+            ) {
+              animateCounter(entry.target);
+              entry.target.classList.add("counted");
             }
-        });
-    }, { threshold: 0.5 });
+          });
+        },
+        { threshold: 0.5 },
+      );
 
-    document.querySelectorAll('.counter').forEach(counter => {
+      document.querySelectorAll(".counter").forEach((counter) => {
         counterObserver.observe(counter);
-    });
-</script>
-
-</body>
+      });
+    </script>
+  </body>
 </html>

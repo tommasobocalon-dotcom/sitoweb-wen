@@ -1,356 +1,365 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recensioni – WeN Assistenza Caldaie</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #1a1a1a;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #1a1a1a;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-        /* HEADER */
-        header {
-            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-            color: #fff;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-        }
+      /* HEADER */
+      header {
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        color: #fff;
+        padding: 20px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+      }
 
-        header .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
+      header .logo {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
 
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: white;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      nav a:hover {
+        transform: translateY(-2px);
+      }
+
+      /* SECTIONS */
+      .section {
+        padding: 100px 5%;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        min-height: 80vh;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 42px;
+        font-weight: 800;
+        color: #1a1a1a;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #d63447, #a14040);
+        border-radius: 2px;
+      }
+
+      /* TESTIMONIALS */
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        margin-top: 60px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .testimonial {
+        background: white;
+        padding: 35px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        position: relative;
+        font-size: 17px;
+        line-height: 1.8;
+        color: #444;
+        border-left: 5px solid transparent;
+      }
+
+      .testimonial::before {
+        content: '"';
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        font-size: 80px;
+        color: #d63447;
+        opacity: 0.15;
+        font-family: Georgia, serif;
+        line-height: 1;
+      }
+
+      .testimonial:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(214, 52, 71, 0.2);
+        border-left-color: #d63447;
+      }
+
+      .testimonial strong {
+        display: block;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #d63447;
+        font-weight: 700;
+      }
+
+      /* FOOTER */
+      footer {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 15px;
+      }
+
+      /* MOBILE CALL BUTTON */
+      .call-mobile {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+        padding: 18px 28px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
+        display: none;
+        z-index: 999;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .call-mobile::before {
+        content: "📞";
+        margin-right: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .call-mobile {
+          display: block;
+        }
+      }
+
+      /* MENU MOBILE */
+      .hamburger {
+        display: none;
+        font-size: 32px;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.3s ease;
+      }
+
+      .hamburger:hover {
+        transform: rotate(90deg);
+      }
+
+      @media (max-width: 768px) {
         nav ul {
-            list-style: none;
-            display: flex;
-            gap: 35px;
+          display: none;
+          flex-direction: column;
+          background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
+          padding: 30px;
+          position: absolute;
+          top: 70px;
+          right: 20px;
+          border-radius: 15px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          gap: 20px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            position: relative;
+        #menu.open ul {
+          display: flex;
+          animation: slideIn 0.3s ease;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: white;
-            transition: width 0.3s ease;
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            transform: translateY(-2px);
-        }
-
-        /* SECTIONS */
-        .section {
-            padding: 100px 5%;
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-            min-height: 80vh;
+        .hamburger {
+          display: block;
         }
 
         h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 42px;
-            font-weight: 800;
-            color: #1a1a1a;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+          font-size: 32px;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #d63447, #a14040);
-            border-radius: 2px;
+        .section {
+          padding: 60px 5%;
         }
 
-        /* TESTIMONIALS */
         .testimonials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
-            margin-top: 60px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+          grid-template-columns: 1fr;
         }
+      }
 
-        .testimonial {
-            background: white;
-            padding: 35px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            font-size: 17px;
-            line-height: 1.8;
-            color: #444;
-            border-left: 5px solid transparent;
-        }
+      /* ANIMAZIONE FADE-IN */
+      .fade {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
 
-        .testimonial::before {
-            content: '"';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 80px;
-            color: #d63447;
-            opacity: 0.15;
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-
-        .testimonial:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(214, 52, 71, 0.2);
-            border-left-color: #d63447;
-        }
-
-        .testimonial strong {
-            display: block;
-            margin-top: 20px;
-            font-size: 16px;
-            color: #d63447;
-            font-weight: 700;
-        }
-
-        /* FOOTER */
-        footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 15px;
-        }
-
-        /* MOBILE CALL BUTTON */
-        .call-mobile {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-            padding: 18px 28px;
-            border-radius: 50px;
-            color: white;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 8px 30px rgba(214, 52, 71, 0.5);
-            display: none;
-            z-index: 999;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .call-mobile::before {
-            content: '📞';
-            margin-right: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .call-mobile { display: block; }
-        }
-
-        /* MENU MOBILE */
-        .hamburger {
-            display: none;
-            font-size: 32px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .hamburger:hover {
-            transform: rotate(90deg);
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                flex-direction: column;
-                background: linear-gradient(135deg, #d63447 0%, #a14040 100%);
-                padding: 30px;
-                position: absolute;
-                top: 70px;
-                right: 20px;
-                border-radius: 15px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                gap: 20px;
-            }
-
-            #menu.open ul {
-                display: flex;
-                animation: slideIn 0.3s ease;
-            }
-
-            @keyframes slideIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            h2 {
-                font-size: 32px;
-            }
-
-            .section {
-                padding: 60px 5%;
-            }
-
-            .testimonials {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ANIMAZIONE FADE-IN */
-        .fade { 
-            opacity: 0; 
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-
-        .fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      .fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-</head>
-<body>
-
-<header>
-    <div class="logo">WeN Assistenza Caldaie</div>
-    <nav id="menu">
+  </head>
+  <body>
+    <header>
+      <div class="logo">WeN Assistenza Caldaie</div>
+      <nav id="menu">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="servizi.html">Servizi</a></li>
-            <li><a href="chi-siamo.html">Chi Siamo</a></li>
-            <li><a href="recensioni.html" class="active">Recensioni</a></li>
-            <li><a href="contatti.html">Contatti</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="recensioni.html" class="active">Recensioni</a></li>
+          <li><a href="circe.html">CIRCE</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
         </ul>
-    </nav>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-</header>
+      </nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </header>
 
-<section class="section fade">
-    <h2>Cosa Dicono i Nostri Clienti</h2>
+    <section class="section fade">
+      <h2>Cosa Dicono i Nostri Clienti</h2>
 
-    <div class="testimonials">
-
+      <div class="testimonials">
         <div class="testimonial">
-            Intervento rapidissimo! Tecnico molto gentile e professionale. Consigliatissimi.
-            <strong>– Marco R.</strong>
+          Intervento rapidissimo! Tecnico molto gentile e professionale.
+          Consigliatissimi.
+          <strong>– Marco R.</strong>
         </div>
 
         <div class="testimonial">
-            Avevo la caldaia in blocco. In meno di due ore era risolta. Servizio eccellente!
-            <strong>– Giulia F.</strong>
+          Avevo la caldaia in blocco. In meno di due ore era risolta. Servizio
+          eccellente!
+          <strong>– Giulia F.</strong>
         </div>
 
         <div class="testimonial">
-            Contratto di manutenzione davvero conveniente. Seri e puntuali.
-            <strong>– Luca P.</strong>
+          Contratto di manutenzione davvero conveniente. Seri e puntuali.
+          <strong>– Luca P.</strong>
         </div>
 
         <div class="testimonial">
-            Ho chiamato per un'emergenza la sera tardi e sono arrivati subito. Davvero affidabili!
-            <strong>– Alessandro M.</strong>
+          Ho chiamato per un'emergenza la sera tardi e sono arrivati subito.
+          Davvero affidabili!
+          <strong>– Alessandro M.</strong>
         </div>
 
         <div class="testimonial">
-            Personale competente e prezzi onesti. Finalmente un'azienda seria nel settore!
-            <strong>– Francesca B.</strong>
+          Personale competente e prezzi onesti. Finalmente un'azienda seria nel
+          settore!
+          <strong>– Francesca B.</strong>
         </div>
 
         <div class="testimonial">
-            La mia caldaia aveva un problema ricorrente. Hanno individuato e risolto la causa definitivamente.
-            <strong>– Roberto S.</strong>
+          La mia caldaia aveva un problema ricorrente. Hanno individuato e
+          risolto la causa definitivamente.
+          <strong>– Roberto S.</strong>
         </div>
+      </div>
+    </section>
 
-    </div>
-</section>
+    <footer>
+      <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
+    </footer>
 
-<footer>
-    <p>© 2025 WeN Assistenza Caldaie – Tutti i diritti riservati</p>
-</footer>
+    <a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
 
-<a class="call-mobile" href="tel:0422821309">Chiama Ora</a>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("open");
+      }
 
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById('menu');
-        menu.classList.toggle('open');
-    }
-
-    // Fade-in animation on scroll
-    const observerOptions = {
+      // Fade-in animation on scroll
+      const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
+        rootMargin: "0px 0px -100px 0px",
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
         });
-    }, observerOptions);
+      }, observerOptions);
 
-    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-</script>
-
-</body>
+      document.querySelectorAll(".fade").forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
