@@ -225,34 +225,36 @@
 
       /* TIMELINE */
       .timeline {
-        max-width: 900px;
+        max-width: 100%;
         margin: 60px auto;
         position: relative;
+        padding-bottom: 80px;
+        padding-left: 5%;
+        padding-right: 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
       }
 
       .timeline::before {
         content: "";
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(180deg, #d63447, #a14040);
+        top: 50%;
+        left: 5%;
+        right: 5%;
+        transform: translateY(-50%);
+        height: 4px;
+        background: linear-gradient(90deg, #d63447, #a14040);
         border-radius: 2px;
       }
 
       .timeline-item {
         display: flex;
-        margin-bottom: 40px;
+        flex-direction: column;
+        align-items: center;
         position: relative;
-      }
-
-      .timeline-item:nth-child(odd) {
-        justify-content: flex-start;
-      }
-
-      .timeline-item:nth-child(even) {
-        justify-content: flex-end;
+        flex: 1;
+        max-width: 280px;
       }
 
       .timeline-content {
@@ -260,13 +262,13 @@
         padding: 25px 30px;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        width: 45%;
+        width: 100%;
         position: relative;
         transition: all 0.3s ease;
       }
 
       .timeline-content:hover {
-        transform: scale(1.05);
+        transform: translateY(-10px);
         box-shadow: 0 15px 40px rgba(214, 52, 71, 0.2);
       }
 
@@ -503,12 +505,29 @@
           padding: 60px 5%;
         }
 
+        .timeline {
+          flex-direction: column;
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+
         .timeline::before {
           left: 20px;
+          right: auto;
+          top: 0;
+          width: 4px;
+          height: 100%;
+          background: linear-gradient(180deg, #d63447, #a14040);
+          transform: none;
         }
 
         .timeline-item {
-          justify-content: flex-end !important;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 40px;
         }
 
         .timeline-content {
